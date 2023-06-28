@@ -37,11 +37,7 @@
     },
     "com.unity.ide.rider": {
       "version": "3.0.21",
-<<<<<<< HEAD
       "depth": 0,
-=======
-      "depth": 1,
->>>>>>> a88c9f8290ca2b958b5f543e0b1cd570d4de5cce
       "source": "registry",
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6"
@@ -50,11 +46,7 @@
     },
     "com.unity.ide.visualstudio": {
       "version": "2.0.18",
-<<<<<<< HEAD
       "depth": 0,
-=======
-      "depth": 1,
->>>>>>> a88c9f8290ca2b958b5f543e0b1cd570d4de5cce
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
@@ -66,6 +58,15 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "1.6.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.performance.profile-analyzer": {
@@ -84,11 +85,7 @@
     },
     "com.unity.test-framework": {
       "version": "1.1.33",
-<<<<<<< HEAD
       "depth": 0,
-=======
-      "depth": 1,
->>>>>>> a88c9f8290ca2b958b5f543e0b1cd570d4de5cce
       "source": "registry",
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6",
