@@ -77,7 +77,6 @@ public class PlayerMove1 : MonoBehaviour
         grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
         grabbedObject.transform.SetParent(transform);
         isGrabbing = true;
-
         playerSpeed = originalPlayerSpeed * 0.5f;
     }
 
@@ -102,7 +101,6 @@ public class PlayerMove1 : MonoBehaviour
                 return collider.gameObject;
             }
         }
-
         return null;
     }
     void PlayerSkills()
