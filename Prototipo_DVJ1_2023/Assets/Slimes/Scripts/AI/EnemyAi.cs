@@ -75,7 +75,7 @@ public class EnemyAi : MonoBehaviour
                         //facing to camera
                         transform.rotation = Quaternion.identity;
 
-                        //currentState = SlimeAnimationState.Idle;
+                        currentState = SlimeAnimationState.Idle;
                     }
                        
                 }
@@ -89,7 +89,7 @@ public class EnemyAi : MonoBehaviour
                     // agent reaches the destination
                     if (agent.remainingDistance < agent.stoppingDistance)
                     {
-                        //currentState = SlimeAnimationState.Idle;
+                        currentState = SlimeAnimationState.Idle;
 
                         //wait 2s before go to next destionation
                         Invoke(nameof(WalkToNextDestination), 2f);
