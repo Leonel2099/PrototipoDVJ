@@ -7,22 +7,19 @@ public class Patrollig : MonoBehaviour
 {
     private NavMeshAgent agent;
     public float range;
-    public Transform centrePoint;
-
-    //public Transform[] waypoints;
-    //int waypointIndex;
-    //Vector3 target;
+    private Vector3 centrePoint;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        centrePoint = new Vector3(16.67f, 2.7f, -15.34f);
     }
     private void Update()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 point;
-            if(RandomPoint(centrePoint.position, range, out point))
+            if(RandomPoint(centrePoint, range, out point))
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
                 agent.SetDestination(point);
