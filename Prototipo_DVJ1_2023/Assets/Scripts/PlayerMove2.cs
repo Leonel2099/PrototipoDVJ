@@ -9,6 +9,8 @@ public class PlayerMove2 : MonoBehaviour
     public CharacterController player;
     private Vector2 movementInput;
 
+    private Animator anim;
+
     private Vector3 playerInput;
 
     public float playerSpeed;
@@ -31,6 +33,7 @@ public class PlayerMove2 : MonoBehaviour
         _myInput.Player2.Enable();
         player = GetComponent<CharacterController>();
         originalPlayerSpeed = playerSpeed;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -51,6 +54,7 @@ public class PlayerMove2 : MonoBehaviour
 
         SetGravity();
         PlayerSkills();
+        Animacion();
 
         player.Move(movePlayer * Time.deltaTime);
         if (_myInput.Player2.Interaction.IsPressed())
@@ -70,6 +74,17 @@ public class PlayerMove2 : MonoBehaviour
             DropObject();
         }
 
+    }
+    void Animacion()
+    {
+        if (_myInput.Player2.Move.IsPressed())
+        {
+            anim.SetFloat("EstaEnMovimiento", playerSpeed);
+        }
+        else
+        {
+            anim.SetFloat("EstaEnMovimiento", 0);
+        }
     }
     void GrabObject(GameObject obj)
     {
@@ -111,6 +126,11 @@ public class PlayerMove2 : MonoBehaviour
         {
             fallVelocity = jumpForce;
             movePlayer.y = fallVelocity * Time.deltaTime;
+            anim.SetBool("EstaEnElSuelo", false);
+        }
+        else
+        {
+            anim.SetBool("EstaEnElSuelo", true);
         }
     }
     void SetGravity()

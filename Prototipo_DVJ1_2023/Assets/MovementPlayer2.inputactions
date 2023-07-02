@@ -92,7 +92,7 @@
                 {
                     "name": "",
                     "id": "46c618cb-6fc0-402e-b446-5855daa7d3cd",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "5fc17323-85de-46ad-8827-d4d4f166f454",
-                    "path": "<Keyboard>/l",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
