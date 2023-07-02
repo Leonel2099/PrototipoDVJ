@@ -10,7 +10,7 @@ public class Pasando : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Capsule")
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
         {
             bridgeRed.Play("Red_On");
             bridgeBlue.Play("Blue_On");
@@ -23,7 +23,7 @@ public class Pasando : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Capsule")
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
         {
            bridgeRed.Play("Red_Off");
            bridgeBlue.Play("Blue_Off");

@@ -9,7 +9,7 @@ public class ButtonPlataform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.name=="Capsule")
+        if (other.gameObject.name=="Rocky" || other.gameObject.name == "Max")
         {
             pressButton = true;
 
@@ -18,7 +18,7 @@ public class ButtonPlataform : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Capsule")
+        if (other.gameObject.name == "Rocky" || other.gameObject.name == "Max")
         {
             pressButton = false;
         }

@@ -10,7 +10,6 @@ public class PlayerMove1 : MonoBehaviour
     private Vector2 movementInput;
 
     private Animator anim;
-
     private Vector3 playerInput;
 
     public float playerSpeed;
@@ -142,6 +141,7 @@ public class PlayerMove1 : MonoBehaviour
             movePlayer.y = fallVelocity;
         }
     }
+    
     void camDirection()
     {
         camForward = mainCamera.transform.forward;
@@ -152,5 +152,12 @@ public class PlayerMove1 : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "WaterPlane")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -9,7 +9,7 @@ public class Plataform : MonoBehaviour
     public float platformSpeed = 2; // velocidad de la plataforma
     private int waypointsIndex = 0; // es de donde va a comenzar
 
-    private void Update()
+    private void FixedUpdate()
     {
         movePlataform();
     }
@@ -26,6 +26,21 @@ public class Plataform : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointsIndex].transform.position, platformSpeed * Time.deltaTime);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
+        {
+            other.gameObject.transform.SetParent(transform);
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
+        {
+            other.gameObject.transform.SetParent(null);
+
+        }
+    }
 }
 

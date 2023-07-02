@@ -10,8 +10,9 @@ public class PlataformMove : MonoBehaviour
     public GameObject[] waypoints;  // puntos de ruta
     public float platformSpeed = 2; // velocidad de la plataforma
     private int waypointsIndex = 0; // es de donde va a comenzar
+    GameObject max;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (plataformScript.pressButton)
         {
@@ -28,5 +29,21 @@ public class PlataformMove : MonoBehaviour
         }
        
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
+        {
+            other.gameObject.transform.SetParent(transform.GetChild(0));
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
+        {
+            other.gameObject.transform.SetParent(null);
+
+        }
     }
 }
