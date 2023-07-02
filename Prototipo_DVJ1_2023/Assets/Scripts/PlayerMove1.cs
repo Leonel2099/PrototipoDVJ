@@ -21,16 +21,16 @@ public class PlayerMove1 : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
-    private GameObject grabbedObject;
-    private bool isGrabbing;
-    private float originalPlayerSpeed;
+    //private GameObject grabbedObject;
+    //private bool isGrabbing;
+    //private float originalPlayerSpeed;
 
     private void Start()
     {
         _myInput = new MovementPlayer1();
         _myInput.Player1.Enable();
         player = GetComponent<CharacterController>();
-        originalPlayerSpeed = playerSpeed;
+        //originalPlayerSpeed = playerSpeed;
     }
 
     void Update()
@@ -53,58 +53,58 @@ public class PlayerMove1 : MonoBehaviour
         PlayerSkills();
 
         player.Move(movePlayer * Time.deltaTime);
-        if (_myInput.Player1.Interaction.IsPressed())
-        {
-            if (!isGrabbing)
-            {
-                GameObject nearbyObject = CheckForNearbyObject();
+        //if (_myInput.Player1.Interaction.IsPressed())
+        //{
+        //    if (!isGrabbing)
+        //    {
+        //        GameObject nearbyObject = CheckForNearbyObject();
 
-                if (nearbyObject != null)
-                {
-                    GrabObject(nearbyObject);
-                }
-            }
-        }
-        else if (isGrabbing)
-        {
-            DropObject();
-        }
+        //        if (nearbyObject != null)
+        //        {
+        //            GrabObject(nearbyObject);
+        //        }
+        //    }
+        //}
+        //else if (isGrabbing)
+        //{
+        //    DropObject();
+        //}
 
     }
-    void GrabObject(GameObject obj)
-    {
-        grabbedObject = obj;
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
-        grabbedObject.transform.SetParent(transform);
-        isGrabbing = true;
+    //void GrabObject(GameObject obj)
+    //{
+    //    grabbedObject = obj;
+    //    grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+    //    grabbedObject.transform.SetParent(transform);
+    //    isGrabbing = true;
 
-        playerSpeed = originalPlayerSpeed * 0.5f;
-    }
+    //    playerSpeed = originalPlayerSpeed * 0.5f;
+    //}
 
-    void DropObject()
-    {
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-        grabbedObject.transform.SetParent(null);
-        grabbedObject = null;
-        isGrabbing = false;
+    //void DropObject()
+    //{
+    //    grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+    //    grabbedObject.transform.SetParent(null);
+    //    grabbedObject = null;
+    //    isGrabbing = false;
 
-        playerSpeed = originalPlayerSpeed;
-    }
+    //    playerSpeed = originalPlayerSpeed;
+    //}
 
-    GameObject CheckForNearbyObject()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
+    //GameObject CheckForNearbyObject()
+    //{
+    //    Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
 
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Grabbable"))
-            {
-                return collider.gameObject;
-            }
-        }
+    //    foreach (Collider collider in colliders)
+    //    {
+    //        if (collider.CompareTag("Grabbable"))
+    //        {
+    //            return collider.gameObject;
+    //        }
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
     void PlayerSkills()
     {
         if (player.isGrounded && _myInput.Player1.Jump.IsPressed())
