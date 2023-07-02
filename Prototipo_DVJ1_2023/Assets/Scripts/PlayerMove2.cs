@@ -154,4 +154,11 @@ public class PlayerMove2 : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "WaterPlane")
+        {
+            Destroy(gameObject);
+        }
+    }
 }

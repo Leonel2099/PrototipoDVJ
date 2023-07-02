@@ -9,7 +9,7 @@ public class ControlBoton : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player1" || other.gameObject.name == "Player2")
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
         {
             jugadorEncima = true;
         }
@@ -17,7 +17,7 @@ public class ControlBoton : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Player1" || other.gameObject.name == "Player2")
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
         {
             jugadorEncima = false;
         }
