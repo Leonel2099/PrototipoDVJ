@@ -10,7 +10,6 @@ public class PlayerMove2 : MonoBehaviour
     private Vector2 movementInput;
 
     private Animator anim;
-
     private Vector3 playerInput;
 
     public float playerSpeed;
@@ -92,7 +91,6 @@ public class PlayerMove2 : MonoBehaviour
         grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
         grabbedObject.transform.SetParent(transform);
         isGrabbing = true;
-
         playerSpeed = originalPlayerSpeed * 0.5f;
     }
 
@@ -102,7 +100,6 @@ public class PlayerMove2 : MonoBehaviour
         grabbedObject.transform.SetParent(null);
         grabbedObject = null;
         isGrabbing = false;
-
         playerSpeed = originalPlayerSpeed;
     }
 

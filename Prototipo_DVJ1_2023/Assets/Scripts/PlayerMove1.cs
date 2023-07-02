@@ -92,20 +92,16 @@ public class PlayerMove1 : MonoBehaviour
         grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
         grabbedObject.transform.SetParent(transform);
         isGrabbing = true;
-
         playerSpeed = originalPlayerSpeed * 0.5f;
     }
-
     void DropObject()
     {
         grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
         grabbedObject.transform.SetParent(null);
         grabbedObject = null;
         isGrabbing = false;
-
         playerSpeed = originalPlayerSpeed;
     }
-
     GameObject CheckForNearbyObject()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
@@ -146,9 +142,6 @@ public class PlayerMove1 : MonoBehaviour
             movePlayer.y = fallVelocity;
         }
     }
-
-
-
     void camDirection()
     {
         camForward = mainCamera.transform.forward;
