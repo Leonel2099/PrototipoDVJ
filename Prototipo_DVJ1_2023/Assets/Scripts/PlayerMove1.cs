@@ -9,6 +9,7 @@ public class PlayerMove1 : MonoBehaviour
     public CharacterController player;
     private Vector2 movementInput;
 
+    private Animator anim;
     private Vector3 playerInput;
 
     public float playerSpeed;
@@ -31,6 +32,7 @@ public class PlayerMove1 : MonoBehaviour
         _myInput.Player1.Enable();
         player = GetComponent<CharacterController>();
         originalPlayerSpeed = playerSpeed;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -51,6 +53,7 @@ public class PlayerMove1 : MonoBehaviour
 
         SetGravity();
         PlayerSkills();
+        Animacion();
 
         player.Move(movePlayer * Time.deltaTime);
         if (_myInput.Player1.Interaction.IsPressed())
@@ -71,26 +74,33 @@ public class PlayerMove1 : MonoBehaviour
         }
 
     }
+    void Animacion() 
+    {
+        if (_myInput.Player1.Move.IsPressed())
+        {
+            anim.SetFloat("EstaEnMovimiento", playerSpeed);
+        }
+        else
+        {
+            anim.SetFloat("EstaEnMovimiento", 0);
+        }
+    }
     void GrabObject(GameObject obj)
     {
         grabbedObject = obj;
         grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
         grabbedObject.transform.SetParent(transform);
         isGrabbing = true;
-
         playerSpeed = originalPlayerSpeed * 0.5f;
     }
-
     void DropObject()
     {
         grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
         grabbedObject.transform.SetParent(null);
         grabbedObject = null;
         isGrabbing = false;
-
         playerSpeed = originalPlayerSpeed;
     }
-
     GameObject CheckForNearbyObject()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
@@ -111,6 +121,11 @@ public class PlayerMove1 : MonoBehaviour
         {
             fallVelocity = jumpForce;
             movePlayer.y = fallVelocity * Time.deltaTime;
+            anim.SetBool("EstaEnElSuelo", false);
+        }
+        else
+        {
+            anim.SetBool("EstaEnElSuelo", true);
         }
     }
     void SetGravity()
@@ -126,9 +141,7 @@ public class PlayerMove1 : MonoBehaviour
             movePlayer.y = fallVelocity;
         }
     }
-
-
-
+    
     void camDirection()
     {
         camForward = mainCamera.transform.forward;
@@ -139,5 +152,12 @@ public class PlayerMove1 : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "WaterPlane")
+        {
+            Destroy(gameObject);
+        }
     }
 }
