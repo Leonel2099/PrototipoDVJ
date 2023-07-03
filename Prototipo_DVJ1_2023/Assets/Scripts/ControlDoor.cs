@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlPuerta : MonoBehaviour
+public class ControlDoor : MonoBehaviour
 {
+    /*Variables*/
     public Transform puerta;
-    public ControlBoton controlBoton;
+    public ControlButton controlButton;
     public float alturaPuertaCerrada = 2.4594f;
     public float alturaPuertaAbierta = -1.72f;
     public float velocidadApertura = 1.0f;
@@ -19,10 +20,10 @@ public class ControlPuerta : MonoBehaviour
         puertaCollider = puerta.GetComponent<Collider>();
         alturaObjetivo = alturaPuertaCerrada;
     }
-
     void Update()
-    {
-        if (controlBoton.jugadorEncima)
+    { 
+        /*Verifica si un jugador esta encima del boton*/
+        if (controlButton.jugadorEncima)
         {
             alturaObjetivo = alturaPuertaAbierta;
         }
@@ -31,12 +32,13 @@ public class ControlPuerta : MonoBehaviour
             alturaObjetivo = alturaPuertaCerrada;
         }
 
-        float nuevaAltura = Mathf.MoveTowards(puerta.localPosition.y, alturaObjetivo, velocidadApertura * Time.deltaTime);
+        float nuevaAltura = Mathf.MoveTowards(puerta.localPosition.y, alturaObjetivo, velocidadApertura * Time.deltaTime);//Mueve la posicion de la puerta hacia la altura objetivo
         puerta.localPosition = new Vector3(puerta.localPosition.x, nuevaAltura, puerta.localPosition.z);
-
+        
+        /*Comprueba que la puerta alcance la altura objetivo*/
         if (Mathf.Approximately(nuevaAltura, alturaObjetivo))
         {
-            puertaAbierta = controlBoton.jugadorEncima;
+            puertaAbierta = controlButton.jugadorEncima;
         }
     }
 }

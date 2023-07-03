@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PickableObject : MonoBehaviour
 {
+    /*Vraiables*/
     public bool isPickable = true;
 
-    private void OnTriggerEnter(Collider other) // cuando la caja entre en trigger hara:
+    /*Detecta si hay colision con un tag especifico*/
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "PlayerInteractionZone")
         {

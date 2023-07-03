@@ -37,7 +37,16 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interaction"",
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9a554c3-794b-4de7-9cb7-44bd718c9772"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab"",
                     ""type"": ""Button"",
                     ""id"": ""d588dcbc-355b-4caf-bbdf-eadf9a50e985"",
                     ""expectedControlType"": ""Button"",
@@ -46,9 +55,9 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Drop"",
                     ""type"": ""Button"",
-                    ""id"": ""a9a554c3-794b-4de7-9cb7-44bd718c9772"",
+                    ""id"": ""b04206f7-d27c-47e9-9356-c103b4a0c45d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -114,18 +123,29 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""46c618cb-6fc0-402e-b446-5855daa7d3cd"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""988b0e7b-236e-43ce-9c38-5a3d503264c3"",
                     ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Interaction"",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""5fc17323-85de-46ad-8827-d4d4f166f454"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -153,8 +173,9 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
-        m_Player2_Interaction = m_Player2.FindAction("Interaction", throwIfNotFound: true);
         m_Player2_Jump = m_Player2.FindAction("Jump", throwIfNotFound: true);
+        m_Player2_Grab = m_Player2.FindAction("Grab", throwIfNotFound: true);
+        m_Player2_Drop = m_Player2.FindAction("Drop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -217,15 +238,17 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player2;
     private List<IPlayer2Actions> m_Player2ActionsCallbackInterfaces = new List<IPlayer2Actions>();
     private readonly InputAction m_Player2_Move;
-    private readonly InputAction m_Player2_Interaction;
     private readonly InputAction m_Player2_Jump;
+    private readonly InputAction m_Player2_Grab;
+    private readonly InputAction m_Player2_Drop;
     public struct Player2Actions
     {
         private @MovementPlayer2 m_Wrapper;
         public Player2Actions(@MovementPlayer2 wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player2_Move;
-        public InputAction @Interaction => m_Wrapper.m_Player2_Interaction;
         public InputAction @Jump => m_Wrapper.m_Player2_Jump;
+        public InputAction @Grab => m_Wrapper.m_Player2_Grab;
+        public InputAction @Drop => m_Wrapper.m_Player2_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Player2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -238,12 +261,15 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Interaction.started += instance.OnInteraction;
-            @Interaction.performed += instance.OnInteraction;
-            @Interaction.canceled += instance.OnInteraction;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Grab.started += instance.OnGrab;
+            @Grab.performed += instance.OnGrab;
+            @Grab.canceled += instance.OnGrab;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         private void UnregisterCallbacks(IPlayer2Actions instance)
@@ -251,12 +277,15 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Interaction.started -= instance.OnInteraction;
-            @Interaction.performed -= instance.OnInteraction;
-            @Interaction.canceled -= instance.OnInteraction;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Grab.started -= instance.OnGrab;
+            @Grab.performed -= instance.OnGrab;
+            @Grab.canceled -= instance.OnGrab;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         public void RemoveCallbacks(IPlayer2Actions instance)
@@ -286,7 +315,8 @@ public partial class @MovementPlayer2: IInputActionCollection2, IDisposable
     public interface IPlayer2Actions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnInteraction(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnGrab(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
 }

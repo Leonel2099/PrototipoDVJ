@@ -15,7 +15,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interaction",
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "a9a554c3-794b-4de7-9cb7-44bd718c9772",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab",
                     "type": "Button",
                     "id": "d588dcbc-355b-4caf-bbdf-eadf9a50e985",
                     "expectedControlType": "Button",
@@ -24,9 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Drop",
                     "type": "Button",
-                    "id": "a9a554c3-794b-4de7-9cb7-44bd718c9772",
+                    "id": "b04206f7-d27c-47e9-9356-c103b4a0c45d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -92,18 +101,29 @@
                 {
                     "name": "",
                     "id": "46c618cb-6fc0-402e-b446-5855daa7d3cd",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "988b0e7b-236e-43ce-9c38-5a3d503264c3",
                     "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Interaction",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "5fc17323-85de-46ad-8827-d4d4f166f454",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
