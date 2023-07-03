@@ -6,4 +6,8 @@ public class PointExp : MonoBehaviour
 {
     public float pointExp;
 
+    private void Update()
+    {
+        Debug.Log("Puntos" + pointExp);
+    }
 }

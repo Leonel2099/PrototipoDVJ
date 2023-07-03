@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove1 : MonoBehaviour
+public class Player1Behaviour : MonoBehaviour
 {
-    private MovementPlayer1 _myInput;
+    /*Variables*/
+    private MovementPlayer1 inputPlayer;
     public CharacterController player;
     private Vector2 movementInput;
 
@@ -21,23 +22,19 @@ public class PlayerMove1 : MonoBehaviour
     public Camera mainCamera;
     private Vector3 camForward;
     private Vector3 camRight;
-
-    private GameObject grabbedObject;
-    private bool isGrabbing;
-    private float originalPlayerSpeed;
+        
 
     private void Start()
     {
-        _myInput = new MovementPlayer1();
-        _myInput.Player1.Enable();
+        inputPlayer = new MovementPlayer1();
+        inputPlayer.Player1.Enable();
         player = GetComponent<CharacterController>();
-        originalPlayerSpeed = playerSpeed;
         anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        movementInput = _myInput.Player1.Move.ReadValue<Vector2>();
+        movementInput = inputPlayer.Player1.Move.ReadValue<Vector2>();//Lee las teclas definida por el inputSystem
 
         playerInput = (new Vector3(movementInput.x, 0, movementInput.y));
 
@@ -45,38 +42,23 @@ public class PlayerMove1 : MonoBehaviour
 
         camDirection();
 
-        movePlayer = playerInput.x * camRight + playerInput.z * camForward;
+        movePlayer = playerInput.x * camRight + playerInput.z * camForward;//El jugador camina hacia la direccino donde mira 
 
         movePlayer *= playerSpeed;
 
-        player.transform.LookAt(player.transform.position + movePlayer);
+        player.transform.LookAt(player.transform.position + movePlayer);//El jugador mira hacia la direccion en que camina
 
         SetGravity();
-        PlayerSkills();
+        Jump();
         Animacion();
 
         player.Move(movePlayer * Time.deltaTime);
-        if (_myInput.Player1.Interaction.IsPressed())
-        {
-            if (!isGrabbing)
-            {
-                GameObject nearbyObject = CheckForNearbyObject();
-
-                if (nearbyObject != null)
-                {
-                    GrabObject(nearbyObject);
-                }
-            }
-        }
-        else if (isGrabbing)
-        {
-            DropObject();
-        }
 
     }
-    void Animacion() 
+    /*Funcion para ejecutar la animacion presionando una tecla*/
+    void Animacion()
     {
-        if (_myInput.Player1.Move.IsPressed())
+        if (inputPlayer.Player1.Move.IsPressed())
         {
             anim.SetFloat("EstaEnMovimiento", playerSpeed);
         }
@@ -85,39 +67,10 @@ public class PlayerMove1 : MonoBehaviour
             anim.SetFloat("EstaEnMovimiento", 0);
         }
     }
-    void GrabObject(GameObject obj)
+   /*Funcion para que verifica si el jugador salta o no*/
+    void Jump()
     {
-        grabbedObject = obj;
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
-        grabbedObject.transform.SetParent(transform);
-        isGrabbing = true;
-        playerSpeed = originalPlayerSpeed * 0.5f;
-    }
-    void DropObject()
-    {
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-        grabbedObject.transform.SetParent(null);
-        grabbedObject = null;
-        isGrabbing = false;
-        playerSpeed = originalPlayerSpeed;
-    }
-    GameObject CheckForNearbyObject()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Grabbable"))
-            {
-                return collider.gameObject;
-            }
-        }
-
-        return null;
-    }
-    void PlayerSkills()
-    {
-        if (player.isGrounded && _myInput.Player1.Jump.IsPressed())
+        if (player.isGrounded && inputPlayer.Player1.Jump.IsPressed())
         {
             fallVelocity = jumpForce;
             movePlayer.y = fallVelocity * Time.deltaTime;
@@ -128,6 +81,7 @@ public class PlayerMove1 : MonoBehaviour
             anim.SetBool("EstaEnElSuelo", true);
         }
     }
+    /*Se setea la gravedad*/
     void SetGravity()
     {
         if (player.isGrounded)
@@ -141,7 +95,7 @@ public class PlayerMove1 : MonoBehaviour
             movePlayer.y = fallVelocity;
         }
     }
-    
+    /*Se obtiene las direcciones de la camara principal*/
     void camDirection()
     {
         camForward = mainCamera.transform.forward;
@@ -157,6 +111,7 @@ public class PlayerMove1 : MonoBehaviour
     {
         if (other.gameObject.name == "WaterPlane")
         {
+            Debug.Log("Jugador1");
             Destroy(gameObject);
         }
     }

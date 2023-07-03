@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove2 : MonoBehaviour
+public class Player2Behaviour : MonoBehaviour
 {
+    /*Variables*/
     private MovementPlayer2 _myInput;
     public CharacterController player;
     private Vector2 movementInput;
@@ -22,22 +23,17 @@ public class PlayerMove2 : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
-    private GameObject grabbedObject;
-    private bool isGrabbing;
-    private float originalPlayerSpeed;
-
     private void Start()
     {
         _myInput = new MovementPlayer2();
         _myInput.Player2.Enable();
         player = GetComponent<CharacterController>();
-        originalPlayerSpeed = playerSpeed;
         anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        movementInput = _myInput.Player2.Move.ReadValue<Vector2>();
+        movementInput = _myInput.Player2.Move.ReadValue<Vector2>();//Lee las teclas definida por el inputSystem
 
         playerInput = (new Vector3(movementInput.x, 0, movementInput.y));
 
@@ -45,36 +41,21 @@ public class PlayerMove2 : MonoBehaviour
 
         camDirection();
 
-        movePlayer = playerInput.x * camRight + playerInput.z * camForward;
+        movePlayer = playerInput.x * camRight + playerInput.z * camForward;//El jugador camina hacia la direccino donde mira 
 
         movePlayer *= playerSpeed;
 
-        player.transform.LookAt(player.transform.position + movePlayer);
+        player.transform.LookAt(player.transform.position + movePlayer);//El jugador mira hacia la direccion en que camina
 
         SetGravity();
-        PlayerSkills();
+        Jump();
         Animacion();
 
         player.Move(movePlayer * Time.deltaTime);
-        if (_myInput.Player2.Interaction.IsPressed())
-        {
-            if (!isGrabbing)
-            {
-                GameObject nearbyObject = CheckForNearbyObject();
-
-                if (nearbyObject != null)
-                {
-                    GrabObject(nearbyObject);
-                }
-            }
-        }
-        else if (isGrabbing)
-        {
-            DropObject();
-        }
 
     }
-    void Animacion()
+    /*Funcion para ejecutar la animacion presionando una tecla*/
+    void Animacion() 
     {
         if (_myInput.Player2.Move.IsPressed())
         {
@@ -85,39 +66,8 @@ public class PlayerMove2 : MonoBehaviour
             anim.SetFloat("EstaEnMovimiento", 0);
         }
     }
-    void GrabObject(GameObject obj)
-    {
-        grabbedObject = obj;
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
-        grabbedObject.transform.SetParent(transform);
-        isGrabbing = true;
-        playerSpeed = originalPlayerSpeed * 0.5f;
-    }
-
-    void DropObject()
-    {
-        grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-        grabbedObject.transform.SetParent(null);
-        grabbedObject = null;
-        isGrabbing = false;
-        playerSpeed = originalPlayerSpeed;
-    }
-
-    GameObject CheckForNearbyObject()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Grabbable"))
-            {
-                return collider.gameObject;
-            }
-        }
-
-        return null;
-    }
-    void PlayerSkills()
+    /*Funcion para que verifica si el jugador salta o no*/
+    void Jump()
     {
         if (player.isGrounded && _myInput.Player2.Jump.IsPressed())
         {
@@ -130,6 +80,7 @@ public class PlayerMove2 : MonoBehaviour
             anim.SetBool("EstaEnElSuelo", true);
         }
     }
+    /*Se setea la gravedad*/
     void SetGravity()
     {
         if (player.isGrounded)
@@ -143,6 +94,7 @@ public class PlayerMove2 : MonoBehaviour
             movePlayer.y = fallVelocity;
         }
     }
+    /*Se obtiene las direcciones de la camara principal*/
     void camDirection()
     {
         camForward = mainCamera.transform.forward;
@@ -158,6 +110,7 @@ public class PlayerMove2 : MonoBehaviour
     {
         if (other.gameObject.name == "WaterPlane")
         {
+            Debug.Log("Jugador2");
             Destroy(gameObject);
         }
     }

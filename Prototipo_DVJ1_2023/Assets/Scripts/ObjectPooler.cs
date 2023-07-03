@@ -5,11 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectPoolItem
 {
-
+	/*Variable*/
 	public GameObject objectToPool;
 	public int amountToPool;
 	public bool shouldExpand = true;
 
+
+	/*Se crea una clase*/
 	public ObjectPoolItem(GameObject obj, int amt, bool exp = true)
 	{
 		objectToPool = obj;
@@ -20,9 +22,9 @@ public class ObjectPoolItem
 
 public class ObjectPooler : MonoBehaviour
 {
+	/*Variable*/
 	public static ObjectPooler SharedInstance;
 	public List<ObjectPoolItem> itemsToPool;
-
 
 	public List<List<GameObject>> pooledObjectsList;
 	public List<GameObject> pooledObjects;
@@ -30,9 +32,7 @@ public class ObjectPooler : MonoBehaviour
 
 	void Awake()
 	{
-
 		SharedInstance = this;
-
 		pooledObjectsList = new List<List<GameObject>>();
 		pooledObjects = new List<GameObject>();
 		positions = new List<int>();
@@ -44,8 +44,6 @@ public class ObjectPooler : MonoBehaviour
 		}
 
 	}
-
-
 	public GameObject GetPooledObject(int index)
 	{
 
@@ -88,12 +86,12 @@ public class ObjectPooler : MonoBehaviour
 		return currLen;
 	}
 
-
+	/**/
 	void ObjectPoolItemToPooledObject(int index)
 	{
-		ObjectPoolItem item = itemsToPool[index];
+		ObjectPoolItem item = itemsToPool[index];//Se crea un objeto de la clase ObjectPoolItem y se lo guarda en una lista
 
-		pooledObjects = new List<GameObject>();
+		pooledObjects = new List<GameObject>();//Se instancia nueva lista de objetos
 		for (int i = 0; i < item.amountToPool; i++)
 		{
 			GameObject obj = (GameObject)Instantiate(item.objectToPool);
@@ -103,7 +101,6 @@ public class ObjectPooler : MonoBehaviour
 		}
 		pooledObjectsList.Add(pooledObjects);
 		positions.Add(0);
-
 	}
 }
 
