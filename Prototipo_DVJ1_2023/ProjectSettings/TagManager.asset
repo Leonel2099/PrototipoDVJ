@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grabbable
   - Agua
+  - PlayerInteractionZone
   layers:
   - Default
   - TransparentFX

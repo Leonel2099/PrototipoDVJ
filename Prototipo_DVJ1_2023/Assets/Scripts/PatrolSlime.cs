@@ -3,29 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Patrollig : MonoBehaviour
+public class PatrolSlime : MonoBehaviour
 {
+    /*Varible*/
     private NavMeshAgent agent;
     public float range;
-    private Vector3 centrePoint;
+    private Vector3 centerPoint;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        centrePoint = new Vector3(16.67f, 2.7f, -15.34f);
+        centerPoint = new Vector3(16.67f, 2.7f, -15.34f);
     }
     private void Update()
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 point;
-            if(RandomPoint(centrePoint, range, out point))
+            if(RandomPoint(centerPoint, range, out point))
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
-                agent.SetDestination(point);
+                agent.SetDestination(point);//Se establece el destino aleatorio dentro del navmeshAgent
             }
         }
     }
+    /*Retorna un booleano y la position del punto random en el navMesh*/
     bool RandomPoint(Vector3 center , float range , out Vector3 result)
     {
         for (int i = 0; i < 30; i++)
@@ -41,32 +43,4 @@ public class Patrollig : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
-    //void Start()
-    //{
-    //    UpDateDetination();
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (Vector3.Distance(transform.position, target) < 1)
-    //    {
-    //        IterateWaypintsIndex();
-    //        UpDateDetination();
-    //    }
-
-    //}
-    //void UpDateDetination()
-    //{
-    //    target = waypoints[waypointIndex].position;
-    //    agent.SetDestination(target);
-    //}
-    //void IterateWaypintsIndex()
-    //{
-    //    waypointIndex++;
-    //    if(waypointIndex == waypoints.Length)
-    //    {
-    //        waypointIndex = 0;
-    //    }
-    //}
 }
