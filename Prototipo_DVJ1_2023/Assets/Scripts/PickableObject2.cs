@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickableObject : MonoBehaviour
+public class PickableObject2 : MonoBehaviour
 {
     /*Vraiables*/
     public bool isPickable = true;
@@ -12,7 +12,7 @@ public class PickableObject : MonoBehaviour
     {
         if (other.tag == "PlayerInteractionZone")
         {
-            other.GetComponentInParent<PickUpObjects>().ObjectToPickUp = this.gameObject;
+            other.GetComponentInParent<PickUpObjects2>().ObjectToPickUp2 = this.gameObject;
         }
     }
 
@@ -20,7 +20,7 @@ public class PickableObject : MonoBehaviour
     {
         if (other.tag == "PlayerInteractionZone")
         {
-            other.GetComponentInParent<PickUpObjects>().ObjectToPickUp = null;
+            other.GetComponentInParent<PickUpObjects2>().ObjectToPickUp2 = null;
         }
     }
 }
