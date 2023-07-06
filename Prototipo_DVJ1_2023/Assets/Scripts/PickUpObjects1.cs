@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PickUpObjects : MonoBehaviour
+public class PickUpObjects1 : MonoBehaviour
 {
     /*Variables*/
-    public GameObject ObjectToPickUp;
+    public GameObject ObjectToPickUp1;
     public GameObject PickedObject;
     public Transform interactionZone;
     private MovementPlayer1 inputPlayer1;
-    private MovementPlayer2 inputPlayer2;
 
     private void Start()
     {
         inputPlayer1 = new MovementPlayer1();
         inputPlayer1.Player1.Enable();
-        inputPlayer2 = new MovementPlayer2();
-        inputPlayer2.Player2.Enable();
     }
     void Update()
     {
         /*Corrobora si el player puede recoger un objeto*/
-        if (ObjectToPickUp != null && ObjectToPickUp.GetComponent<PickableObject>().isPickable == true && PickedObject == null)
+        if (ObjectToPickUp1 != null && ObjectToPickUp1.GetComponent<PickableObject1>().isPickable == true && PickedObject == null)
         {
             /*Corrobora si el player presiona el boton asignado, agarra el objeto */
-            if (inputPlayer1.Player1.Grab.IsPressed() || inputPlayer2.Player2.Grab.IsPressed())
+            if (inputPlayer1.Player1.Grab.IsPressed())
             {
-                PickedObject = ObjectToPickUp;
-                PickedObject.GetComponent<PickableObject>().isPickable = false;
+                PickedObject = ObjectToPickUp1;
+                PickedObject.GetComponent<PickableObject1>().isPickable = false;
                 PickedObject.transform.SetParent(interactionZone);
                 PickedObject.transform.position = interactionZone.position;
                 PickedObject.GetComponent<Rigidbody>().useGravity = false;
@@ -39,9 +36,9 @@ public class PickUpObjects : MonoBehaviour
         else if (PickedObject != null)
         {
             /*Corrobora si el player presiona el boton asignado, suelta el objeto */
-            if (inputPlayer1.Player1.Drop.IsPressed() || inputPlayer2.Player2.Drop.IsPressed())
+            if (inputPlayer1.Player1.Drop.IsPressed())
             {
-                PickedObject.GetComponent<PickableObject>().isPickable = true;
+                PickedObject.GetComponent<PickableObject1>().isPickable = true;
                 PickedObject.transform.SetParent(null);
                 PickedObject.GetComponent<Rigidbody>().useGravity = true;
                 PickedObject.GetComponent<Rigidbody>().isKinematic = false;
