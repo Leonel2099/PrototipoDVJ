@@ -5,13 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+   
     public void Game()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(nextScene);
     }
     public void Exit()
     {
         Debug.Log("Salir...");
         Application.Quit(); 
     }
+
 }
