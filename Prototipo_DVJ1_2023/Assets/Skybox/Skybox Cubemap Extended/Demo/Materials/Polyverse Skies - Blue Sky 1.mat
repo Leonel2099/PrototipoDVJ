@@ -38,7 +38,11 @@ Material:
     - _FogPosition: 0
     - _FogSmoothness: 0.01
     - _Fogg: 1
+<<<<<<< HEAD
     - _Rotation: 26.156532
+=======
+    - _Rotation: 119.110146
+>>>>>>> 97e18bbefdc5840539cf4bdead29424662ec122b
     - _RotationSpeed: 1
     - _Rotationn: 1
     - _SkyboxExtended: 1

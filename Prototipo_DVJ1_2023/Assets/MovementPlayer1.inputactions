@@ -15,7 +15,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interaction",
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "e69dd64f-47e4-4104-95f7-42856f727ba0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab",
                     "type": "Button",
                     "id": "8c7aacfa-3a34-4229-b18a-f339a763fffe",
                     "expectedControlType": "Button",
@@ -24,9 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Drop",
                     "type": "Button",
-                    "id": "e69dd64f-47e4-4104-95f7-42856f727ba0",
+                    "id": "9d8d6e15-d7d2-4561-8386-453fed8e508a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -96,7 +105,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Interaction",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e03fcb2-bfb8-48bd-9733-bd775dbd31d0",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -37,7 +37,16 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interaction"",
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""e69dd64f-47e4-4104-95f7-42856f727ba0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Grab"",
                     ""type"": ""Button"",
                     ""id"": ""8c7aacfa-3a34-4229-b18a-f339a763fffe"",
                     ""expectedControlType"": ""Button"",
@@ -46,9 +55,9 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Drop"",
                     ""type"": ""Button"",
-                    ""id"": ""e69dd64f-47e4-4104-95f7-42856f727ba0"",
+                    ""id"": ""9d8d6e15-d7d2-4561-8386-453fed8e508a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -118,7 +127,18 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Interaction"",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e03fcb2-bfb8-48bd-9733-bd775dbd31d0"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -153,8 +173,9 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
-        m_Player1_Interaction = m_Player1.FindAction("Interaction", throwIfNotFound: true);
         m_Player1_Jump = m_Player1.FindAction("Jump", throwIfNotFound: true);
+        m_Player1_Grab = m_Player1.FindAction("Grab", throwIfNotFound: true);
+        m_Player1_Drop = m_Player1.FindAction("Drop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -217,15 +238,17 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player1;
     private List<IPlayer1Actions> m_Player1ActionsCallbackInterfaces = new List<IPlayer1Actions>();
     private readonly InputAction m_Player1_Move;
-    private readonly InputAction m_Player1_Interaction;
     private readonly InputAction m_Player1_Jump;
+    private readonly InputAction m_Player1_Grab;
+    private readonly InputAction m_Player1_Drop;
     public struct Player1Actions
     {
         private @MovementPlayer1 m_Wrapper;
         public Player1Actions(@MovementPlayer1 wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player1_Move;
-        public InputAction @Interaction => m_Wrapper.m_Player1_Interaction;
         public InputAction @Jump => m_Wrapper.m_Player1_Jump;
+        public InputAction @Grab => m_Wrapper.m_Player1_Grab;
+        public InputAction @Drop => m_Wrapper.m_Player1_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -238,12 +261,15 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Interaction.started += instance.OnInteraction;
-            @Interaction.performed += instance.OnInteraction;
-            @Interaction.canceled += instance.OnInteraction;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Grab.started += instance.OnGrab;
+            @Grab.performed += instance.OnGrab;
+            @Grab.canceled += instance.OnGrab;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
@@ -251,12 +277,15 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Interaction.started -= instance.OnInteraction;
-            @Interaction.performed -= instance.OnInteraction;
-            @Interaction.canceled -= instance.OnInteraction;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Grab.started -= instance.OnGrab;
+            @Grab.performed -= instance.OnGrab;
+            @Grab.canceled -= instance.OnGrab;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -286,7 +315,8 @@ public partial class @MovementPlayer1: IInputActionCollection2, IDisposable
     public interface IPlayer1Actions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnInteraction(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnGrab(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
 }
