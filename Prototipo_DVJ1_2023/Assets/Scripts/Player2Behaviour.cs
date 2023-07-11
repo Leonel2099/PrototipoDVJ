@@ -10,6 +10,9 @@ public class Player2Behaviour : MonoBehaviour
     public CharacterController player;
     private Vector2 movementInput;
 
+    public float threshold;
+    public Transform mainVecPos;
+
     private Animator anim;
     private Vector3 playerInput;
 
@@ -31,8 +34,11 @@ public class Player2Behaviour : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+
+        StartCoroutine(ReSpawn());
+        player.enabled = true;
         movementInput = _myInput.Player2.Move.ReadValue<Vector2>();//Lee las teclas definida por el inputSystem
 
         playerInput = (new Vector3(movementInput.x, 0, movementInput.y));
@@ -54,6 +60,7 @@ public class Player2Behaviour : MonoBehaviour
         player.Move(movePlayer * Time.deltaTime);
 
     }
+
     /*Funcion para ejecutar la animacion presionando una tecla*/
     void Animacion() 
     {
@@ -112,6 +119,16 @@ public class Player2Behaviour : MonoBehaviour
         {
             Debug.Log("Jugador2");
             Destroy(gameObject);
+        }
+    }
+    IEnumerator ReSpawn()
+    {
+        if(transform.position.y < threshold)
+        {
+            yield return 0;
+            gameObject.transform.position= mainVecPos.position;
+            player.enabled = false;
+           
         }
     }
 }
