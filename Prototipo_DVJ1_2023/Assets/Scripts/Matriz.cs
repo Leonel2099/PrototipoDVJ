@@ -10,6 +10,7 @@ public class Matriz : MonoBehaviour
     void Start()
     {
         GenerateFloor();
+        
     }
 
     void GenerateFloor()
