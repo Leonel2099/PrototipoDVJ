@@ -112,8 +112,8 @@ Transform:
   m_GameObject: {fileID: 5615605903349686828}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 670.5, y: 433.1, z: -3.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5680524908946508238}
   m_Father: {fileID: 0}
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2725fc4944d6b4f947b07f4097b3d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 54
-  rows: 54
+  columns: 8
+  rows: 10
   cesped: {r: 0.24705882, g: 0.6784314, b: 0.3254902, a: 0}
   defaultM: {r: 0.06666667, g: 0.5019608, b: 0.26666668, a: 0}
   colide: {fileID: 1438206056567608981}

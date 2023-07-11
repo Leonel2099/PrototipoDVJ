@@ -112,14 +112,15 @@ public class Player1Behaviour : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "WaterPlane")
-        {
-            Debug.Log("Jugador1");
-            Destroy(gameObject);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Agua")
+    //    {
+    //        //Debug.Log("Jugador1");
+    //        //Destroy(gameObject);
+    //        ReSpawn();
+    //    }
+    //}
     IEnumerator ReSpawn()
     {
         if (transform.position.y < threshold)
