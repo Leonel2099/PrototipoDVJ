@@ -10,6 +10,9 @@ public class Player1Behaviour : MonoBehaviour
     public CharacterController player;
     private Vector2 movementInput;
 
+    public float threshold;
+    public Transform mainVecPos;
+
     private Animator anim;
     private Vector3 playerInput;
 
@@ -32,8 +35,10 @@ public class Player1Behaviour : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        StartCoroutine(ReSpawn());
+        player.enabled = true;
         movementInput = inputPlayer.Player1.Move.ReadValue<Vector2>();//Lee las teclas definida por el inputSystem
 
         playerInput = (new Vector3(movementInput.x, 0, movementInput.y));
@@ -113,6 +118,16 @@ public class Player1Behaviour : MonoBehaviour
         {
             Debug.Log("Jugador1");
             Destroy(gameObject);
+        }
+    }
+    IEnumerator ReSpawn()
+    {
+        if (transform.position.y < threshold)
+        {
+            yield return 0;
+            gameObject.transform.position = mainVecPos.position;
+            player.enabled = false;
+
         }
     }
 }
