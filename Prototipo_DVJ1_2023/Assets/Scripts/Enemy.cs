@@ -10,18 +10,21 @@ public class Enemy : MonoBehaviour
     private string state;
     public GameObject player;
     double distance;
-    public Color alert, idle, attack;
+    private Animator animationEnemy;
+
+
+
     private void Start()
     {
         state = StateMachine.IDLE;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        gameObject.GetComponent<Renderer>().material.SetColor("_Color", idle);
+        animationEnemy = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        SetBehaviour();
-        Display();
+            SetBehaviour();
+            Display();
     }
 
     private void Display()
@@ -29,40 +32,40 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case StateMachine.IDLE:
-                gameObject.GetComponent<Renderer>().material.SetColor("_Color", idle);
-                // En caso de que el enemigo tenga una animación de reposo
+                animationEnemy.SetBool("Idle", true);
+                animationEnemy.SetBool("Alert", false);
+                animationEnemy.SetBool("Attack", false);
                 break;
             case StateMachine.ALERT:
-                gameObject.GetComponent<Renderer>().material.SetColor("_Color", alert);
-                // RotateTowardsPlayer();
+                animationEnemy.SetBool("Idle", false);
+                animationEnemy.SetBool("Alert", true);
+                animationEnemy.SetBool("Attack", false);
                 break;
             case StateMachine.ATTACK:
-                gameObject.GetComponent<Renderer>().material.SetColor("_Color", attack);
-                //RotateTowardsPlayer();
+                animationEnemy.SetBool("Attack", true);
+                animationEnemy.SetBool("Idle", false);
+                animationEnemy.SetBool("Alert", false);
+                
                 MoveTowardsPlayer();
 
                 break;
         }
     }
 
-    //private void RotateTowardsPlayer()
-    //{
-    //    Vector3 direction = playerTransform.position - transform.position;
-    //    Quaternion lookRotation = Quaternion.LookRotation(direction);
-    //    transform.rotation = lookRotation;
-    //}
+
 
     private double CalculateDistance()
     {
-       distance = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2)+ Mathf.Pow(player.transform.position.z - transform.position.z, 2));
+        distance = Mathf.Sqrt(Mathf.Pow(player.transform.position.x - transform.position.x, 2) + Mathf.Pow(player.transform.position.z - transform.position.z, 2));
         return distance;
-       // return Vector3.Distance(playerTransform.position, transform.position);
+
+
     }
 
     private void SetBehaviour()
     {
         distance = CalculateDistance();
-        Debug.Log(distance);
+        
         switch (state)
         {
             case StateMachine.IDLE:
@@ -114,8 +117,10 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        Vector3 direction = playerTransform.position - transform.position;
-        direction.Normalize();
+       
+        Vector3 direction = new Vector3(playerTransform.position.x, 0, playerTransform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
+        transform.forward = direction;
+        direction.Normalize(); 
         Vector3 movement = direction * speed * Time.deltaTime;
         transform.Translate(movement, Space.World);
     }
