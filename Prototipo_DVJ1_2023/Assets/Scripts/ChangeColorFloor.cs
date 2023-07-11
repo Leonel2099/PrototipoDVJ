@@ -21,25 +21,20 @@ public class ChangeColorFloor : MonoBehaviour
     }
     void CheckPosFloor()
     {
-        for (int x = 0; x < columns; x += 6)
+        for (int x = -2; x < columns; x += 2)
         {
-            for (int y = 0; y < rows; y += 6)
+            for (int y = 0; y < rows; y += 2)
             {
                 switch (gameObject.name)
                 {
-                    case "piso 18 48":
-                    case "piso 24 0":
-                    case "piso 24 6":
-                    case "piso 24 12":
-                    case "piso 30 12":
-                    case "piso 36 12":
-                    case "piso 36 18":
-                    case "piso 36 24":
-                    case "piso 30 24":
-                    case "piso 30 30":
-                    case "piso 30 36":
-                    case "piso 30 48":
-                    case "piso 30 42":
+                    case "piso 0 6":
+                    case "piso 0 8":
+                    case "piso 2 0":
+                    case "piso 2 2":
+                    case "piso 2 6":
+                    case "piso 4 2":
+                    case "piso 4 4":
+                    case "piso 4 6":
                         colide.size=new Vector3(6f, 2, 6f);
                         gameObject.GetComponent<BoxCollider>().isTrigger = false;
                         break;

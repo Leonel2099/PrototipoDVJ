@@ -14,9 +14,9 @@ public class Matriz : MonoBehaviour
 
     void GenerateFloor()
     {
-        for (int x = 0; x < columns; x+=6)
+        for (int x =-2; x < columns; x+=2)
         {
-            for(int y= 0; y < rows; y+=6)
+            for(int y=0; y < rows; y+=2)
             {
                 var spawnPiso = Instantiate(floor, new Vector3(x,0, y), Quaternion.identity);
                 spawnPiso.name = $"piso {x} {y}";

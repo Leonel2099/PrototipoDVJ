@@ -20,7 +20,7 @@ public class Matematicas : MonoBehaviour
 
 
 
-    void Update()
+    void FixedUpdate()
     {
         degrees += speedRotation * Time.deltaTime;
         radians = degrees * Mathf.Deg2Rad; // Convertimos a radianes 
@@ -51,5 +51,21 @@ public class Matematicas : MonoBehaviour
             }
         }*/
         countRotation = degrees / 360;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
+        {
+            other.gameObject.transform.SetParent(transform);//Mantienen la misma posicion
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "Max" || other.gameObject.name == "Rocky")
+        {
+            other.gameObject.transform.SetParent(null);
+
+        }
     }
 }
