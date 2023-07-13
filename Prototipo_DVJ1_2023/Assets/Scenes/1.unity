@@ -6354,7 +6354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 401520309}
-  - component: {fileID: 401520311}
+  - component: {fileID: 401520312}
   - component: {fileID: 401520310}
   m_Layer: 0
   m_Name: zonaAgarreP1
@@ -6391,7 +6391,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.456522, y: 1, z: 3.361605}
   m_Center: {x: 0.7282609, y: 0, z: 1.1808031}
---- !u!114 &401520311
+--- !u!114 &401520312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14497,7 +14497,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 82451929}
   player2: {fileID: 369586518}
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
   minDistance: 6
+=======
+  minDistance: 10
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
   maxDistance: 8
   smoothTime: 0.3
   offset: {x: 1, y: 1, z: 0}
@@ -16831,7 +16835,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1039613943
+=======
+--- !u!114 &1039613944
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17919,7 +17927,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1141155224
+=======
+--- !u!114 &1141155225
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21925,7 +21937,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1414875132
+=======
+--- !u!114 &1414875133
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22936,7 +22952,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1452216861
+=======
+--- !u!114 &1452216862
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23194,7 +23214,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1466718888
+=======
+--- !u!114 &1466718889
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24315,7 +24339,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPickable: 1
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1549570483
+=======
+--- !u!114 &1549570484
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26551,7 +26579,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &1660289590
+=======
+--- !u!114 &1660289591
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28619,7 +28651,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
   m_RootOrder: 1
+=======
+  m_RootOrder: 2
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1741502210
 BoxCollider:
@@ -32992,7 +33028,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &2027741901
+=======
+--- !u!114 &2027741902
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34704,7 +34744,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD:Prototipo_DVJ1_2023/Assets/Scenes/MapaUno.unity
 --- !u!114 &2129004714
+=======
+--- !u!114 &2129004715
+>>>>>>> 9ffffa70527e1c07edfe7f4271bac32cd4e91c7e:Prototipo_DVJ1_2023/Assets/Scenes/1.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
