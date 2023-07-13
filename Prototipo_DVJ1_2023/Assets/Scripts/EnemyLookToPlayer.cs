@@ -9,7 +9,10 @@ public class EnemyLookToPlayer : MonoBehaviour
 
     void Update()
     {
+        Vector3 enemyVector = transform.forward;
         Vector3 enemyToObjectVector = new Vector3(player.position.x, 0, player.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
-        transform.forward = enemyToObjectVector;        
+        transform.forward = enemyToObjectVector;
+        float dotProduct = Vector3.Dot(enemyVector, enemyToObjectVector);
+        
     }
 }

@@ -24,7 +24,9 @@ public class CatEnemy : MonoBehaviour
     void FixedUpdate()
     {
         DisplayCat();
-        SetBehaviour();          
+        SetBehaviour();
+        
+      
     }
 
     private void DisplayCat()
@@ -32,7 +34,9 @@ public class CatEnemy : MonoBehaviour
         switch (state)
         {
             case StateMachine.IDLE:
-                 break;
+               
+
+                break;
             case StateMachine.ATTACK:
                 timer += Time.deltaTime;
                 if(timer >= firerate)
@@ -46,16 +50,19 @@ public class CatEnemy : MonoBehaviour
     }
 
     private void AttackPlayer()
-    {       
+    {
+       
         GameObject bullet = Instantiate(bulletPrefabs, shootPosition.position, Quaternion.identity);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletRb.velocity = (playerTransform.transform.position - shootPosition.position).normalized * bulletSpeed;
+        bulletRb.velocity = (playerTransform.transform.position - transform.position).normalized * bulletSpeed;
     }
 
     private double CalculateDistance()
     {
         distance = Mathf.Sqrt(Mathf.Pow(playerTransform.position.x - transform.position.x, 2) + Mathf.Pow(playerTransform.position.z - transform.position.z, 2));
         return distance;
+
+
     }
 
 
