@@ -115,10 +115,11 @@ public class Player2Behaviour : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "WaterPlane")
+        if (other.gameObject.CompareTag("Enemy"))
         {
+            StartCoroutine(ReSpawn());
             Debug.Log("Jugador2");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
     IEnumerator ReSpawn()
@@ -127,8 +128,7 @@ public class Player2Behaviour : MonoBehaviour
         {
             yield return 0;
             gameObject.transform.position= mainVecPos.position;
-            player.enabled = false;
-           
+            player.enabled = false;           
         }
     }
 }

@@ -11,14 +11,13 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     double distance;
     private Animator animationEnemy;
-
-
+    public GameObject hitZone;
 
     private void Start()
     {
         state = StateMachine.IDLE;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        animationEnemy = GetComponent<Animator>();
+        animationEnemy = GetComponent<Animator>();        
     }
 
     private void Update()
@@ -44,10 +43,8 @@ public class Enemy : MonoBehaviour
             case StateMachine.ATTACK:
                 animationEnemy.SetBool("Attack", true);
                 animationEnemy.SetBool("Idle", false);
-                animationEnemy.SetBool("Alert", false);
-                
+                animationEnemy.SetBool("Alert", false);                
                 MoveTowardsPlayer();
-
                 break;
         }
     }
@@ -65,7 +62,7 @@ public class Enemy : MonoBehaviour
     private void SetBehaviour()
     {
         distance = CalculateDistance();
-        
+        bool hit= hitZone.GetComponent<Hitting>().hitting;
         switch (state)
         {
             case StateMachine.IDLE:
@@ -98,9 +95,10 @@ public class Enemy : MonoBehaviour
                 break;
             case StateMachine.ATTACK:
                 {
-                    if (distance > detectionRange)
+                    if (distance > detectionRange || hit)
                     {
                         state = StateMachine.IDLE;
+                        hit = false;
                     }
                     else if (distance > 4f && distance < 8f)
                     {
@@ -114,10 +112,9 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
-
+    
     private void MoveTowardsPlayer()
-    {
-       
+    {       
         Vector3 direction = new Vector3(playerTransform.position.x, 0, playerTransform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
         transform.forward = direction;
         direction.Normalize(); 

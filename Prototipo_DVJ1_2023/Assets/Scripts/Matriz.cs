@@ -11,7 +11,6 @@ public class Matriz : MonoBehaviour
     {
         GenerateFloor();
     }
-
     void GenerateFloor()
     {
         for (int x =-2; x < columns; x+=2)
