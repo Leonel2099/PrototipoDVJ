@@ -25,7 +25,9 @@ public class Player1Behaviour : MonoBehaviour
     public Camera mainCamera;
     private Vector3 camForward;
     private Vector3 camRight;
-        
+    bool isHit;
+
+
 
     private void Start()
     {
@@ -33,11 +35,12 @@ public class Player1Behaviour : MonoBehaviour
         inputPlayer.Player1.Enable();
         player = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        isHit = false;
     }
 
     void FixedUpdate()
     {
-        StartCoroutine(ReSpawn());
+        StartCoroutine(ReSpawn(isHit));
         player.enabled = true;
         movementInput = inputPlayer.Player1.Move.ReadValue<Vector2>();//Lee las teclas definida por el inputSystem
 
@@ -112,23 +115,22 @@ public class Player1Behaviour : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Agua")
-    //    {
-    //        //Debug.Log("Jugador1");
-    //        //Destroy(gameObject);
-    //        ReSpawn();
-    //    }
-    //}
-    IEnumerator ReSpawn()
+    private void OnTriggerEnter(Collider other)
+    {        
+        if (other.gameObject.name == "hitZone" || other.gameObject.tag == "Enemy")
+        {
+            isHit = true;       
+            //Debug.Log("Jugador1");
+        }
+    }
+    IEnumerator ReSpawn(bool IsHit)
     {
-        if (transform.position.y < threshold)
+        if (transform.position.y < threshold || IsHit)
         {
             yield return 0;
             gameObject.transform.position = mainVecPos.position;
             player.enabled = false;
-
+            isHit = false;
         }
     }
 }

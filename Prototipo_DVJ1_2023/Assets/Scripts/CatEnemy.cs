@@ -16,23 +16,23 @@ public class CatEnemy : MonoBehaviour
 
     void Start()
     {
-        state = StateMachine.IDLE;
-    
+        state = StateMachine.IDLE;    
     }
 
 
     void FixedUpdate()
     {
         DisplayCat();
-        SetBehaviour();          
+        SetBehaviour();              
     }
 
     private void DisplayCat()
     {
         switch (state)
         {
-            case StateMachine.IDLE:
-                 break;
+            case StateMachine.IDLE:             
+
+                break;
             case StateMachine.ATTACK:
                 timer += Time.deltaTime;
                 if(timer >= firerate)
@@ -40,7 +40,6 @@ public class CatEnemy : MonoBehaviour
                     AttackPlayer();
                     timer = 0f;
                 }
-
                 break;
         }
     }
@@ -49,7 +48,7 @@ public class CatEnemy : MonoBehaviour
     {       
         GameObject bullet = Instantiate(bulletPrefabs, shootPosition.position, Quaternion.identity);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletRb.velocity = (playerTransform.transform.position - shootPosition.position).normalized * bulletSpeed;
+        bulletRb.velocity = ((playerTransform.transform.position + new Vector3(0f, 1.5f, 0f)) - shootPosition.position).normalized * bulletSpeed;
     }
 
     private double CalculateDistance()
@@ -61,8 +60,7 @@ public class CatEnemy : MonoBehaviour
 
     private void SetBehaviour()
     {
-        distance = CalculateDistance();
-        
+        distance = CalculateDistance();   
 
         switch (state)
         {
@@ -83,8 +81,7 @@ public class CatEnemy : MonoBehaviour
                 {
                     if (distance > detectionRange)
                     {
-                        state = StateMachine.IDLE;
-                   
+                        state = StateMachine.IDLE;                   
                     }
 
                 }
